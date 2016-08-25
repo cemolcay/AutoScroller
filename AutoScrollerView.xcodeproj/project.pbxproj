@@ -14,6 +14,7 @@
 		B211B24C1D6ED6AD008FDF16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B211B24A1D6ED6AD008FDF16 /* LaunchScreen.storyboard */; };
 		B211B2571D6ED6AE008FDF16 /* AutoScrollerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B211B2561D6ED6AE008FDF16 /* AutoScrollerViewTests.swift */; };
 		B211B2621D6ED6AE008FDF16 /* AutoScrollerViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B211B2611D6ED6AE008FDF16 /* AutoScrollerViewUITests.swift */; };
+		B211B2701D6ED6C3008FDF16 /* AutoScrollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B211B26F1D6ED6C3008FDF16 /* AutoScrollingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		B211B25D1D6ED6AE008FDF16 /* AutoScrollerViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AutoScrollerViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B211B2611D6ED6AE008FDF16 /* AutoScrollerViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoScrollerViewUITests.swift; sourceTree = "<group>"; };
 		B211B2631D6ED6AE008FDF16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B211B26F1D6ED6C3008FDF16 /* AutoScrollingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				B211B2481D6ED6AD008FDF16 /* Assets.xcassets */,
 				B211B24A1D6ED6AD008FDF16 /* LaunchScreen.storyboard */,
 				B211B24D1D6ED6AD008FDF16 /* Info.plist */,
+				B211B26F1D6ED6C3008FDF16 /* AutoScrollingView.swift */,
 			);
 			path = AutoScrollerView;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				B211B2441D6ED6AD008FDF16 /* ViewController.swift in Sources */,
 				B211B2421D6ED6AD008FDF16 /* AppDelegate.swift in Sources */,
+				B211B2701D6ED6C3008FDF16 /* AutoScrollingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
