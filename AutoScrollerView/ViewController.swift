@@ -44,5 +44,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     scrollView.hideAutoScroller()
   }
+
+  func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    scrollView.hideAutoScroller()
+  }
+
+  func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    scrollView.hideAutoScroller()
+  }
 }
 

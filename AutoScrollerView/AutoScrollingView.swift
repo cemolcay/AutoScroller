@@ -8,27 +8,32 @@
 
 import UIKit
 
-class AutoTimer {
+@objc public class AutoTimer: NSObject {
   static let shared = AutoTimer()
-  var timers = [String: Timer]()
+  private var timer: Timer?
+  private var timerAction: (() -> Void)?
 
-  func start(_ name: String, duration: TimeInterval, repeats: Bool = false, after: (() -> Void)? = nil) {
-    guard timers[name] == nil else { return }
-
-    let timer = Timer.scheduledTimer(
-      withTimeInterval: duration,
-      repeats: repeats,
-      block: { _ in
-        self.timers.removeValue(forKey: name)
-        after?()
-    })
-    timers[name] = timer
+  open func start(for duration: TimeInterval, repeats: Bool = false, after: (() -> Void)? = nil) {
+    stop()
+    timerAction = after
+    timer = Timer.scheduledTimer(
+      timeInterval: duration,
+      target: self,
+      selector: #selector(AutoTimer.timerDidStop),
+      userInfo: nil,
+      repeats: repeats)
+    RunLoop.main.add(timer!, forMode: .commonModes)
   }
 
-  func stop(_ name: String) {
-    if let timer = timers[name] {
-      timer.invalidate()
-      timers.removeValue(forKey: name)
+  open func stop() {
+    timer?.invalidate()
+    timer = nil
+  }
+
+  public func timerDidStop() {
+    stop()
+    DispatchQueue.main.async { [weak self] in
+      self?.timerAction?()
     }
   }
 }
@@ -195,7 +200,6 @@ public class AutoScrollerView: UIControl {
 }
 
 @objc public protocol AutoScrollable {
-  var autoScrollingViewTag: Int { get }
   var autoScrollingViewAppearAfterScrollingInterval: TimeInterval { get }
   func addScrollToTopScroller(with scroller: AutoScrollerView)
   func addScrollToBottomScroller(with scroller: AutoScrollerView)
@@ -259,14 +263,28 @@ extension UIScrollView: AutoScrollable {
   private func scrollingDirectionDidChange() {
     switch scrollingDirection {
     case .no:
-      // TODO: Start hide timer for both
-      setHidden(scrollToTopScroller: true, scrollToBottomScroller: true)
+      AutoTimer.shared.start(
+        for: autoScrollingViewAppearAfterScrollingInterval,
+        after: { [weak self] in
+          guard let this = self, this.scrollingDirection == .no else { return }
+          this.setHidden(scrollToTopScroller: true, scrollToBottomScroller: true)
+        })
     case .up:
-      // TODO: Start unhide timer for up
-      setHidden(scrollToTopScroller: false, scrollToBottomScroller: true)
+      setHidden(scrollToTopScroller: true, scrollToBottomScroller: true)
+      AutoTimer.shared.start(
+        for: autoScrollingViewAppearAfterScrollingInterval,
+        after: { [weak self] in
+          guard let this = self, this.scrollingDirection == .up else { return }
+          this.setHidden(scrollToTopScroller: false, scrollToBottomScroller: true)
+        })
     case .down:
-      // TODO: Start unhide timer for down
-      setHidden(scrollToTopScroller: true, scrollToBottomScroller: false)
+      setHidden(scrollToTopScroller: true, scrollToBottomScroller: true)
+      AutoTimer.shared.start(
+        for: autoScrollingViewAppearAfterScrollingInterval,
+        after: { [weak self] in
+          guard let this = self, this.scrollingDirection == .down else { return }
+          this.setHidden(scrollToTopScroller: true, scrollToBottomScroller: false)
+        })
     }
   }
 
@@ -282,17 +300,15 @@ extension UIScrollView: AutoScrollable {
   }
 
   private func setHidden(scrollToTopScroller: Bool, scrollToBottomScroller: Bool) {
-    autoScrollableScrollToTopView?.isHidden = scrollToTopScroller
-    autoScrollableScrollToBottomView?.isHidden = scrollToBottomScroller
+    UIView.animate(withDuration: 0.3, animations: {
+      self.autoScrollableScrollToTopView?.isHidden = scrollToTopScroller
+      self.autoScrollableScrollToBottomView?.isHidden = scrollToBottomScroller
+    })
   }
 
   // MARK: AutoScrollable
-  open var autoScrollingViewTag: Int {
-    return 100
-  }
-
   open var autoScrollingViewAppearAfterScrollingInterval: TimeInterval {
-    return 1
+    return 0.5
   }
 
   open func addScrollToTopScroller(with scroller: AutoScrollerView) {
