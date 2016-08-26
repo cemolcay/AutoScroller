@@ -218,7 +218,7 @@ public enum ScrollingDirection {
 public var AutoScrollableScrollingDirectionAssociatedObjectHandle: UInt8 = 0
 public var AutoScrollableScrollToTopViewAssociatedObjectHandle: UInt8 = 1
 public var AutoScrollableScrollToBottomViewAssociatedObjectHandle: UInt8 = 2
-public var AutoScrollabelScrollViewPreviousContentOffsetAssociatedObjectHandle: UInt8 = 3
+public var AutoScrollableScrollViewPreviousContentOffsetAssociatedObjectHandle: UInt8 = 3
 
 extension UIScrollView: AutoScrollable {
 
@@ -238,11 +238,11 @@ extension UIScrollView: AutoScrollable {
     }
   }
 
-  private var autoScrollabelScrollViewPreviousContentOffset: CGPoint? {
+  private var autoScrollableScrollViewPreviousContentOffset: CGPoint? {
     get {
-      return objc_getAssociatedObject(self, &AutoScrollabelScrollViewPreviousContentOffsetAssociatedObjectHandle) as? CGPoint ?? CGPoint.zero
+      return objc_getAssociatedObject(self, &AutoScrollableScrollViewPreviousContentOffsetAssociatedObjectHandle) as? CGPoint ?? CGPoint.zero
     } set {
-      objc_setAssociatedObject(self, &AutoScrollabelScrollViewPreviousContentOffsetAssociatedObjectHandle, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+      objc_setAssociatedObject(self, &AutoScrollableScrollViewPreviousContentOffsetAssociatedObjectHandle, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
     }
   }
 
@@ -352,12 +352,12 @@ extension UIScrollView: AutoScrollable {
   }
 
   open func updateAutoScroller() {
-    if autoScrollabelScrollViewPreviousContentOffset == nil {
-      autoScrollabelScrollViewPreviousContentOffset = CGPoint.zero
+    if autoScrollableScrollViewPreviousContentOffset == nil {
+      autoScrollableScrollViewPreviousContentOffset = CGPoint.zero
     }
 
-    scrollingDirection = contentOffset.y > autoScrollabelScrollViewPreviousContentOffset!.y ? .down : .up
-    autoScrollabelScrollViewPreviousContentOffset = contentOffset
+    scrollingDirection = contentOffset.y > autoScrollableScrollViewPreviousContentOffset!.y ? .down : .up
+    autoScrollableScrollViewPreviousContentOffset = contentOffset
   }
 
   open func hideAutoScroller() {
