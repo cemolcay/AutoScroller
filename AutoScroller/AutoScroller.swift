@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public class AutoTimer: NSObject {
+@objc open class AutoTimer: NSObject {
   static let shared = AutoTimer()
   private var timer: Timer?
   private var timerAction: (() -> Void)?
@@ -45,7 +45,7 @@ public enum AutoScrollerViewPosition {
   case bottomRight(bottomOffset: CGFloat, rightOffset: CGFloat)
 }
 
-public class AutoScrollerView: UIControl {
+open class AutoScrollerView: UIControl {
   internal var didPress: (() -> Void)?
 
   private var contentViewConstraints = [NSLayoutConstraint]()
@@ -98,7 +98,7 @@ public class AutoScrollerView: UIControl {
   }
 
   // MARK: Lifecycle
-  public override func didMoveToSuperview() {
+  open override func didMoveToSuperview() {
     super.didMoveToSuperview()
     setupPosition()
   }
