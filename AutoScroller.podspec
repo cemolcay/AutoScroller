@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "AutoScroller"
   s.version      = "0.0.1"
-  s.summary      = "Display custom "scroll to top" or "scroll to bottom" views in to all UIScrollView instances while they are scrolling"
+  s.summary      = "Display custom scroll to top or scroll to bottom views in to all UIScrollView instances while they are scrolling"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
