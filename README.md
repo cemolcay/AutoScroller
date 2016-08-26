@@ -10,7 +10,7 @@ use_frameworks!
 pod 'AutoScroller'
 ```
 
-Requierments
+Requirements
 ---
 * Swift 3
 * Xcode 8
