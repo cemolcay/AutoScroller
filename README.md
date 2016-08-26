@@ -26,6 +26,8 @@ In your view controller call
 * `addScrollToTopScroller(with scroller: AutoScrollerView)` to add  `scrollToTopScroller` when user starts to scroll upwards.
 * `addScrollToBottomScroller(with scroller: AutoScrollerView)` to add `scrollToBottomScroller` when user starts to scroll downwards.
 * Or else, what do you want, where do you want with `AutoScrollerViewPosition` with custom offset support.
+* Call `updateAutoScroller` funciton of scrollView inside `scrollViewDidScroll` function of `UIScrollViewDelegate`.
+* Call `hideAutoScroller` function when you want to hide it, commonly `scrollViewDidEndDragging` function of `UIScrollViewDelegate`.
 
 Basic usage would likely:
 ``` swift
@@ -41,21 +43,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let scrollToTopView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     scrollToTopView.backgroundColor = .lightGray
 
-    scrollView.addScrollToTopScroller(with: AutoScrollerView(
-      contentView: scrollToTopView,
-      position:
-        .bottomRight(bottomOffset: 10, rightOffset: 10)
-    ))
+    scrollView.addScrollToTopScroller(
+      with: AutoScrollerView(
+        contentView: scrollToTopView,
+        position: .bottomRight(bottomOffset: 10, rightOffset: 10)
+      ))
 
     // Add scroll to bottom scroller
     let scrollToBottomView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     scrollToBottomView.backgroundColor = .darkGray
 
-    scrollView.addScrollToBottomScroller(with: AutoScrollerView(
-      contentView: scrollToBottomView,
-      position:
-      .topRight(topOffset: 10, rightOffset: 10)
-    ))
+    scrollView.addScrollToBottomScroller(
+      with: AutoScrollerView(
+        contentView: scrollToBottomView,
+        position: .topRight(topOffset: 10, rightOffset: 10)
+      ))
   }
 
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
