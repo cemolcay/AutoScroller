@@ -10,6 +10,13 @@ use_frameworks!
 pod 'AutoScroller'
 ```
 
+Requierments
+---
+* Swift 3
+* Xcode 8
+* iOS 10+
+* tvOS 10+
+
 Usage
 ---
 `AutoScrollable` is a protocol that enables the functions of adding scrollToTop and scrollToBottom views.
