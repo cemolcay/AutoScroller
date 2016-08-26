@@ -300,10 +300,8 @@ extension UIScrollView: AutoScrollable {
   }
 
   private func setHidden(scrollToTopScroller: Bool, scrollToBottomScroller: Bool) {
-    UIView.animate(withDuration: 0.3, animations: {
-      self.autoScrollableScrollToTopView?.isHidden = scrollToTopScroller
-      self.autoScrollableScrollToBottomView?.isHidden = scrollToBottomScroller
-    })
+    autoScrollableScrollToTopView?.isHidden = scrollToTopScroller
+    autoScrollableScrollToBottomView?.isHidden = scrollToBottomScroller
   }
 
   // MARK: AutoScrollable
