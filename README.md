@@ -20,13 +20,13 @@ Requirements
 Usage
 ---
 `AutoScrollable` is a protocol that enables the functions of adding scrollToTop and scrollToBottom views.
-UIScrollView extesion implements `AutoScrollable` in `AutoScrollable.swift` with `AutoScrollerView` and `AutoTimer` helper classes.
+UIScrollView extension implements `AutoScrollable` in `AutoScrollable.swift` with `AutoScrollerView` and `AutoTimer` helper classes.
   
 In your view controller call
 * `addScrollToTopScroller(with scroller: AutoScrollerView)` to add  `scrollToTopScroller` when user starts to scroll upwards.
 * `addScrollToBottomScroller(with scroller: AutoScrollerView)` to add `scrollToBottomScroller` when user starts to scroll downwards.
 * Or else, what do you want, where do you want with `AutoScrollerViewPosition` with custom offset support.
-* Call `updateAutoScroller` funciton of scrollView inside `scrollViewDidScroll` function of `UIScrollViewDelegate`.
+* Call `updateAutoScroller` function of scrollView inside `scrollViewDidScroll` function of `UIScrollViewDelegate`.
 * Call `hideAutoScroller` function when you want to hide it, commonly `scrollViewDidEndDragging` function of `UIScrollViewDelegate`.
 
 Basic usage would likely:
